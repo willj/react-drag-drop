@@ -16,7 +16,7 @@ class DraggableItem extends React.Component {
     dragStart(e){
         this.props.dragStarted(this.props.index, e);
         e.currentTarget.className += " active-drag-item";
-        e.dataTransfer.setData("text/plain", this.props.index);
+        e.dataTransfer.setData("text/plain", this.props.index.toString());
         e.dataTransfer.effectAllowed = "move";
     }
 
