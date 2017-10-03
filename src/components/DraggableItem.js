@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Classnames from 'classnames';
 
 class DraggableItem extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            isDragging: false,
+            isDropzone: false
+        }
 
         this.dragStart = this.dragStart.bind(this);
         this.dragEnter = this.dragEnter.bind(this);
@@ -15,7 +21,7 @@ class DraggableItem extends React.Component {
 
     dragStart(e){
         this.props.dragStarted(this.props.index, e);
-        e.currentTarget.className += " active-drag-item";
+        this.setState({ isDragging: true });
         e.dataTransfer.setData("text/plain", this.props.index.toString());
         e.dataTransfer.effectAllowed = "move";
     }
@@ -23,14 +29,12 @@ class DraggableItem extends React.Component {
     dragEnter(e){
         e.preventDefault();
         if (this.props.currentDragIndex !== this.props.index) {
-            if (e.currentTarget.className.indexOf("active-drop-zone") === -1){
-                e.currentTarget.className += " active-drop-zone";
-            }
+            this.setState({ isDropzone: true });
         }
     }
 
     dragLeave(e){
-        this.removeActiveDropZoneClass(e);
+        this.setState({ isDropzone: false });
     }
 
     dragOver(e){
@@ -38,21 +42,20 @@ class DraggableItem extends React.Component {
     }
 
     dragEnd(e){
-        e.currentTarget.className = e.currentTarget.className.replace(" active-drag-item", "");
+        this.setState({ isDragging: false });
     }
 
     drop(e){
-        this.removeActiveDropZoneClass(e);
+        this.setState({ isDropzone: false });
         this.props.itemDropped(e, this.props.index);
-    }
-
-    removeActiveDropZoneClass(e){
-        e.currentTarget.className = e.currentTarget.className.replace(" active-drop-zone", "");
     }
 
     render() {
         return (
-            <div className="item" 
+            <div className={Classnames("item", { 
+                    "active-drag-item": this.state.isDragging, 
+                    "active-drop-zone": this.state.isDropzone 
+                })} 
                 draggable="true" 
                 onDragStart={this.dragStart}
                 onDragEnter={this.dragEnter} 
