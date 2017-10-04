@@ -1,5 +1,6 @@
 import React from 'react';
 import DraggableItem from './DraggableItem.js';
+import FileDropHandler from './FileDropHandler';
 
 class Grid extends React.Component {
     constructor(props) {
@@ -12,9 +13,9 @@ class Grid extends React.Component {
 
         this.dragStarted = this.dragStarted.bind(this);
         this.itemDropped = this.itemDropped.bind(this);
-        this.fileDropped = this.fileDropped.bind(this);
         this.gridDragEnd = this.gridDragEnd.bind(this);
         this.gridDragOver = this.gridDragOver.bind(this);
+        this.addItem = this.addItem.bind(this);
     }
 
     // you can't access an item being dragged from the dragOver event, only the target, so lets keep track of what's being dragged
@@ -52,31 +53,33 @@ class Grid extends React.Component {
         this.setState({items: items});
     }
 
-    fileDropped(e){
-        e.preventDefault();
-        console.log("file dropped");
-        console.log(e.dataTransfer.files);
+    addItem(item){
+        this.setState((prevState, props) => { 
+            let items = [...prevState.items,item];
+            return { items: items };
+        });
     }
 
     render(){
         return (
-            <div className="grid" 
-                onDrop={this.fileDropped} 
-                onDragEnd={this.gridDragEnd} 
-                onDragOver={this.gridDragOver}>
-                {
-                    this.state.items.map((item, index) => {
-                        return (
-                            <DraggableItem key={index} index={index} 
-                                currentDragIndex={this.state.currentDragIndex}
-                                dragStarted={this.dragStarted} 
-                                itemDropped={this.itemDropped}>
-                                {item}
-                            </DraggableItem>
-                        );
-                    })
-                }
-            </div>
+            <FileDropHandler onNewFile={this.addItem}>
+                <div className="grid" 
+                    onDragEnd={this.gridDragEnd} 
+                    onDragOver={this.gridDragOver}>
+                    {
+                        this.state.items.map((item, index) => {
+                            return (
+                                <DraggableItem key={index} index={index} 
+                                    currentDragIndex={this.state.currentDragIndex}
+                                    dragStarted={this.dragStarted} 
+                                    itemDropped={this.itemDropped}>
+                                    {item}
+                                </DraggableItem>
+                            );
+                        })
+                    }
+                </div>
+            </FileDropHandler>
         );
     }
 }
