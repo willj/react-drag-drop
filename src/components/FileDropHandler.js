@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Item from './Item';
 
-const supportedFileTypes = ["image/png", "image/jpeg", "image/gif", "image/x-icon", "image/webp"];
+const supportedFileTypes = ["image/png", "image/jpeg", "image/gif", "image/webp"];
 
 class FileDropHandler extends React.Component {
 
