@@ -1,13 +1,14 @@
 import React from 'react';
 import DraggableItem from './DraggableItem.js';
 import FileDropHandler from './FileDropHandler';
+import Item from './Item';
 
 class Grid extends React.Component {
     constructor(props) {
         super(props);
         
         this.state = {
-            items: ["One", "Two", "Three", "Four", "Five", <div>Six <button>Cheeses</button></div>],
+            items: [],
             currentDragIndex: -1
         };
 
@@ -54,6 +55,7 @@ class Grid extends React.Component {
     }
 
     addItem(item){
+        console.log(item);
         this.setState((prevState, props) => { 
             let items = [...prevState.items,item];
             return { items: items };
@@ -66,14 +68,15 @@ class Grid extends React.Component {
                 <div className="grid" 
                     onDragEnd={this.gridDragEnd} 
                     onDragOver={this.gridDragOver}>
+                    { this.state.items.length === 0 && <h1>Drop files here</h1> }
                     {
                         this.state.items.map((item, index) => {
                             return (
-                                <DraggableItem key={index} index={index} 
+                                <DraggableItem key={item.key} index={index} 
                                     currentDragIndex={this.state.currentDragIndex}
                                     dragStarted={this.dragStarted} 
                                     itemDropped={this.itemDropped}>
-                                    {item}
+                                    <Item file={item.file} />
                                 </DraggableItem>
                             );
                         })

@@ -10,13 +10,14 @@ class Item extends React.Component{
             name: this.props.file.name,
             file: this.props.file,
             isUploading: true,
+            percentUploaded: 0,
             url: ''
         };
+
+        this.uploadProgressUpdate = this.uploadProgressUpdate.bind(this);
     }
 
     componentDidMount(){
-
-        window.testFile = this.state.file;
 
         // get an upload token
         Axios.post(process.env.REACT_APP_GET_UPLOAD_TOKEN_URL, { 
@@ -51,13 +52,17 @@ class Item extends React.Component{
     }
 
     uploadProgressUpdate(e){
-        console.log(e);
+        let percent = (e.loaded / e.total) * 100;
+        this.setState({ percentUploaded: percent, isUploading: (percent < 100) ? true : false });
     }
 
     render(){
         return (
-            <p>I'm an item called {this.state.name}</p>
-        )
+            <div>
+                <p>I'm an item called {this.state.name}</p>
+                <p>Uploaded: {this.state.percentUploaded}</p>
+            </div>
+        );
     }
 
 }

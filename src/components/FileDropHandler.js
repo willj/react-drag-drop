@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Item from './Item';
 
 const supportedFileTypes = ["image/png", "image/jpeg", "image/gif", "image/webp"];
 
@@ -19,16 +18,18 @@ class FileDropHandler extends React.Component {
     fileDropped(e){
         e.preventDefault();
         
-        console.log(e.dataTransfer.files);
-        
-        console.log("file dropped in FDH");
-
         for (let i = 0; i < e.dataTransfer.files.length; i++) {
             let file = e.dataTransfer.files.item(i);
-            console.log(file);
-
+            
             if (this.isValidFile(file.type)) {
-                this.props.onNewFile(<Item file={file} />);
+
+                let item = {
+                    file: file,
+                    key: file.name + Date.now(),
+                    title: file.name
+                }; 
+                
+                this.props.onNewFile(item);
             } else {
                 console.log("invalid type");
             }
