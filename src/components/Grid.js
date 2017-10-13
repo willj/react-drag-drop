@@ -48,7 +48,7 @@ class Grid extends React.Component {
         let items = [...this.state.items];
         let item = items.splice(itemIndex, 1);
 
-        items.splice(dropzoneIndex, 0, item);
+        items.splice(dropzoneIndex, 0, item[0]);
 
         this.setState({items: items});
     }
