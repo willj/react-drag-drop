@@ -1,10 +1,18 @@
 import React from 'react';
-import UploadingImage from './UploadingImage';
+import UploadingItem from './UploadingItem';
+import EditableItem from './EditableItem';
+import PropTypes from 'prop-types';
 
 const Item = ({item, index, onChange}) => {
     return (item.url) 
-    ? <p>I'm an item called {item.title}</p>
-    : <UploadingImage file={item.file} item={item} index={index} uploadComplete={onChange} /> ;
+    ? <EditableItem item={item} />
+    : <UploadingItem file={item.file} item={item} index={index} uploadComplete={onChange} /> ;
 }
+
+Item.propTypes = {
+    item: PropTypes.object.isRequired,
+    index: PropTypes.number.isRequired,
+    onChange: PropTypes.func.isRequired
+};
 
 export default Item;

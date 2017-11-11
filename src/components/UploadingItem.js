@@ -15,8 +15,11 @@ class UploadingImage extends React.Component {
     }
 
     componentDidMount(){
-        // get an upload token
-        Axios.post(process.env.REACT_APP_GET_UPLOAD_TOKEN_URL, { 
+        this.getUploadToken();
+    }
+
+    getUploadToken(){
+        return Axios.post(process.env.REACT_APP_GET_UPLOAD_TOKEN_URL, { 
             mimeType: this.props.file.type, 
             fileSize: this.props.file.size 
         })
@@ -40,7 +43,7 @@ class UploadingImage extends React.Component {
         })
         .then((response) => {
             let item = Object.assign({}, this.props.item);
-            item.url = uploadUrl;
+            item.url = uploadUrl.split('?')[0];
     
             this.props.uploadComplete(this.props.index, item);
         })
@@ -69,5 +72,7 @@ export default UploadingImage;
 
 UploadingImage.propTypes = {
     file: PropTypes.objectOf(File).isRequired,
+    item: PropTypes.object.isRequired,
+    index: PropTypes.number.isRequired,
     uploadComplete: PropTypes.func.isRequired
 }
