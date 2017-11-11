@@ -17,6 +17,7 @@ class Grid extends React.Component {
         this.gridDragEnd = this.gridDragEnd.bind(this);
         this.gridDragOver = this.gridDragOver.bind(this);
         this.addItem = this.addItem.bind(this);
+        this.updateItem = this.updateItem.bind(this);
     }
 
     // you can't access an item being dragged from the dragOver event, only the target, so lets keep track of what's being dragged
@@ -42,8 +43,6 @@ class Grid extends React.Component {
 
         e.stopPropagation();
         
-        console.log("item dropped");
-
         let itemIndex = e.dataTransfer.getData("text/plain");
         
         let items = [...this.state.items];
@@ -57,7 +56,16 @@ class Grid extends React.Component {
     addItem(item){
         console.log(item);
         this.setState((prevState, props) => { 
-            let items = [...prevState.items,item];
+            let items = [...prevState.items, item];
+            return { items: items };
+        });
+    }
+
+    updateItem(itemIndex, item){
+        this.setState((prevState, props) => {
+            let items = [...prevState.items];
+            items.splice(itemIndex, 1, item);
+
             return { items: items };
         });
     }
@@ -76,7 +84,7 @@ class Grid extends React.Component {
                                     currentDragIndex={this.state.currentDragIndex}
                                     dragStarted={this.dragStarted} 
                                     itemDropped={this.itemDropped}>
-                                    <Item file={item.file} />
+                                    <Item item={item} index={index} onChange={this.updateItem} />
                                 </DraggableItem>
                             );
                         })
