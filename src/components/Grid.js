@@ -53,7 +53,7 @@ class Grid extends React.Component {
     render(){
         return (
             <FileDropHandler onNewFile={this.addItem}>
-                <DragDropGrid items={this.state.items} updateItem={this.updateItem} moveItem={this.moveItem} >
+                <DragDropGrid items={this.state.items} onChange={this.updateItem} onMove={this.moveItem} onDelete={this.deleteItem}>
                     { this.state.items.length === 0 && <h1>Drop files here</h1> }
                 </DragDropGrid>
             </FileDropHandler>

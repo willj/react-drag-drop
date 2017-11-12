@@ -41,7 +41,7 @@ class DragDropGrid extends React.Component {
         e.stopPropagation();
         
         let itemIndex = e.dataTransfer.getData("text/plain");
-        this.props.moveItem(itemIndex, dropzoneIndex);
+        this.props.onMove(itemIndex, dropzoneIndex);
     }
 
     render(){
@@ -57,7 +57,7 @@ class DragDropGrid extends React.Component {
                                 currentDragIndex={this.state.currentDragIndex}
                                 dragStarted={this.dragStarted} 
                                 itemDropped={this.itemDropped}>
-                                <Item item={item} index={index} onChange={this.props.updateItem} />
+                                <Item item={item} index={index} onChange={this.props.onChange} onDelete={this.props.onDelete} />
                             </DraggableItem>
                         );
                     })
@@ -71,6 +71,7 @@ export default DragDropGrid;
 
 DragDropGrid.propTypes = {
     items: PropTypes.arrayOf(Object).isRequired,
-    updateItem: PropTypes.func.isRequired,
-    moveItem: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    onMove: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired
 };

@@ -45,7 +45,7 @@ class UploadingImage extends React.Component {
             let item = Object.assign({}, this.props.item);
             item.url = uploadUrl.split('?')[0];
     
-            this.props.uploadComplete(this.props.index, item);
+            this.props.onChange(this.props.index, item);
         })
         .catch((err) => {
             console.log(err);
@@ -74,5 +74,5 @@ UploadingImage.propTypes = {
     file: PropTypes.objectOf(File).isRequired,
     item: PropTypes.object.isRequired,
     index: PropTypes.number.isRequired,
-    uploadComplete: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired
 }
