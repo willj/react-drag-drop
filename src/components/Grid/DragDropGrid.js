@@ -1,6 +1,6 @@
 import React from 'react';
-import DraggableItem from './DraggableItem.js';
-import Item from './Item';
+import DraggableItem from '../Item/DraggableItem.js';
+import Item from '../Item/Item';
 import PropTypes from 'prop-types';
 
 class DragDropGrid extends React.Component {

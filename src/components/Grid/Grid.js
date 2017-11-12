@@ -1,6 +1,6 @@
 import React from 'react';
 import DragDropGrid from './DragDropGrid';
-import FileDropHandler from './FileDropHandler';
+import FileDropHandler from '../File/FileDropHandler';
 
 class Grid extends React.Component {
 
