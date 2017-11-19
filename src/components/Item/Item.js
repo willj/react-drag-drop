@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 const Item = ({item, index, onChange, onDelete}) => {
     return (item.url) 
-    ? <EditableItem item={item} onDelete={onDelete} index={index} />
+    ? <EditableItem item={item} onDelete={onDelete} index={index} onChange={onChange} />
     : <UploadingItem file={item.file} item={item} index={index} onChange={onChange} /> ;
 }
 

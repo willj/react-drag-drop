@@ -20,9 +20,9 @@ h1 {
 
 .item {
   width: 180px;
-  height: 180px;
+  height: 250px;
   margin: 20px;
-  background-color: #0000ff;
+  background-color: #ffffff;
   border-radius: 4px;
   float: left;
   color: #ffffff;
