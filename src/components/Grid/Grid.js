@@ -1,6 +1,7 @@
 import React from 'react';
 import DragDropGrid from './DragDropGrid';
 import FileDropHandler from '../File/FileDropHandler';
+import './Grid.css';
 
 class Grid extends React.Component {
 
@@ -8,13 +9,15 @@ class Grid extends React.Component {
         super(props);
 
         this.state = {
-            items: []
+            items: [],
+            title: 'My Project'
         };
 
         this.addItem = this.addItem.bind(this);
         this.updateItem = this.updateItem.bind(this);
         this.moveItem = this.moveItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
+        this.onTitleChange = this.onTitleChange.bind(this);
     }
 
     addItem(item){
@@ -50,13 +53,20 @@ class Grid extends React.Component {
         });
     }
 
+    onTitleChange(e){
+        this.setState({ title: e.target.value });
+    }
+
     render(){
         return (
-            <FileDropHandler onNewFile={this.addItem}>
-                <DragDropGrid items={this.state.items} onChange={this.updateItem} onMove={this.moveItem} onDelete={this.deleteItem}>
-                    { this.state.items.length === 0 && <h1>Drop files here</h1> }
-                </DragDropGrid>
-            </FileDropHandler>
+            <div>
+                <input type="text" value={this.state.title} className="grid-title" onChange={this.onTitleChange} />
+                <FileDropHandler onNewFile={this.addItem}>
+                    <DragDropGrid items={this.state.items} onChange={this.updateItem} onMove={this.moveItem} onDelete={this.deleteItem}>
+                        { this.state.items.length === 0 && <h2>Drop files here</h2> }
+                    </DragDropGrid>
+                </FileDropHandler>
+            </div>
         );
     }
 }
