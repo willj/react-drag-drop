@@ -61,7 +61,7 @@ class UploadingImage extends React.Component {
     render(){
         return (
             <div>
-                <p>I'm uploading {this.props.name}</p>
+                <p>I'm uploading {this.props.file.name}</p>
                 <p>Uploaded: {this.state.percentUploaded}</p>
             </div>
         );
