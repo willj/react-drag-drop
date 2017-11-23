@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import Grid from './components/Grid/Grid';
+import Project from './components/Project/Project';
 
 class App extends Component {
 
     render() {
         return (
             <div className="App">
-                <Grid />
+                <Project />
             </div>
         );
     }
