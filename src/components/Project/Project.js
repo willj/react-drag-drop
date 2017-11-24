@@ -1,5 +1,6 @@
 import React from 'react';
 import Grid from '../Grid/Grid';
+import Axios from 'axios';
 
 class Project extends React.Component {
 
@@ -8,7 +9,8 @@ class Project extends React.Component {
 
         this.state = {
             title: 'My Project',
-            items: []
+            items: [],
+            shareUrl: ''
         };
 
         this.onTitleChange = this.onTitleChange.bind(this);
@@ -21,7 +23,15 @@ class Project extends React.Component {
     }
 
     publish(){
-        console.log(this.state);
+        Axios.post(process.env.REACT_APP_PUBLISH_PROJECT_URL, this.state)
+        .then(response => {
+            if (response.data.id){
+                this.setState({ shareUrl: process.env.REACT_APP_VIEW_PROJECT_URL + '/' + response.data.id});
+            }
+        })
+        .catch(err => {
+            alert(err.response.data);
+        });
     }
 
     updateItemState(items){
@@ -31,8 +41,9 @@ class Project extends React.Component {
     render(){
         return (
             <div>
-                <input type="text" value={this.state.title} className="grid-title" onChange={this.onTitleChange} />
+                <input type="text" value={this.state.title} className="grid-title" onChange={this.onTitleChange} placeholder="Project title" />
                 <button onClick={this.publish}>Publish</button>
+                <p>{this.state.shareUrl}</p>
                 <Grid items={this.state.items} onChangeItems={this.updateItemState} />
             </div>
         );
