@@ -15,7 +15,7 @@ class Viewer extends React.Component{
     }
 
     componentDidMount(){
-        Axios.get(process.env.REACT_APP_GET_PROJECT_URL + "?id=" + this.props.match.params.id)
+        Axios.get(process.env.REACT_APP_GET_PROJECT_URL + "&id=" + this.props.match.params.id)
         .then(response => {
             this.setState({ project: response.data });
         })
