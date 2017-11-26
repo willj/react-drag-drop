@@ -11,13 +11,14 @@ class Viewer extends React.Component{
             project: null,
             currentItemIndex: this.props.match.params.itemIndex || 0
         };
-
     }
 
     componentDidMount(){
         Axios.get(process.env.REACT_APP_GET_PROJECT_URL + "&id=" + this.props.match.params.id)
         .then(response => {
-            this.setState({ project: response.data });
+            let p = (typeof response.data === 'string') ? JSON.parse(response.data) : response.data;
+
+            this.setState({ project: p });
         })
         .catch(err => {
             console.log(err);
