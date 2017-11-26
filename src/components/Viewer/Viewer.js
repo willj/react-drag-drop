@@ -59,7 +59,7 @@ class Viewer extends React.Component{
                 <nav>
                     <Link to={this.prevPageLink()}>Prev</Link> <Link to={this.nextPageLink()}>Next</Link>
                 </nav>
-
+                <h2>{this.state.project.items[this.state.currentItemIndex].title}</h2>
                 <img src={this.state.project.items[this.state.currentItemIndex].url} alt="" />
             </div>
         );
