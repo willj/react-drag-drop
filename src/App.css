@@ -38,6 +38,10 @@ h1 {
   color: #000000;
 }
 
+.active-drop-zone * {
+  pointer-events: none;
+}
+
 #dropper{
   width:100%;
   height: 200px;

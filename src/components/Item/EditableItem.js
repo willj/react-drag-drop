@@ -16,12 +16,17 @@ class EditableItem extends React.Component{
         this.props.onChange(this.props.index, item);
     }
 
+    preventDrag(e){
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
     render(){
         let {item, index, onDelete} = this.props;
         return (
             <div>
-                <input type="text" value={item.title} className="edit-item-title" onChange={this.onChange} />
-                <img src={item.url} alt={item.title} style={{ width: '100%' }} />
+                <input type="text" value={item.title} className="edit-item-title" onChange={this.onChange} draggable onDragStart={this.preventDrag} />
+                <div className="edit-item-image" style={{ backgroundImage: 'url(' + item.url + ')' }}></div>
                 <button onClick={() => { onDelete(index); }}>Delete</button>
             </div>
         );

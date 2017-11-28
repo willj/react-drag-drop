@@ -14,3 +14,10 @@
 .edit-item-title:focus {
     border: 1px solid #333333;
 }
+
+.edit-item-image {
+    width: 180px;
+    height: 180px;
+    background-position: center center;
+    background-size: cover;
+}
