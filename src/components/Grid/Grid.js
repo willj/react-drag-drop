@@ -9,15 +9,9 @@ class Grid extends React.Component {
     constructor(props){
         super(props);
 
-        this.addItem = this.addItem.bind(this);
         this.updateItem = this.updateItem.bind(this);
         this.moveItem = this.moveItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
-    }
-
-    addItem(item){
-        let items = [...this.props.items, item];
-        this.props.onChangeItems(items);
     }
 
     updateItem(itemIndex, item){
@@ -43,7 +37,7 @@ class Grid extends React.Component {
 
     render(){
         return (
-            <FileDropHandler onNewFile={this.addItem}>
+            <FileDropHandler onNewFile={this.props.addItem}>
                 <DragDropGrid items={this.props.items} onChange={this.updateItem} onMove={this.moveItem} onDelete={this.deleteItem}>
                     { this.props.items.length === 0 && <h2>Drop files here</h2> }
                 </DragDropGrid>
@@ -56,5 +50,6 @@ export default Grid;
 
 Grid.propTypes = {
     items: PropTypes.array.isRequired,
+    addItem: PropTypes.func.isRequired, 
     onChangeItems: PropTypes.func.isRequired
 };

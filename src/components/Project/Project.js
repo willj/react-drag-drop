@@ -16,6 +16,7 @@ class Project extends React.Component {
         this.onTitleChange = this.onTitleChange.bind(this);
         this.publish = this.publish.bind(this);
         this.updateItemState = this.updateItemState.bind(this);
+        this.addNewItem = this.addNewItem.bind(this);
     }
 
     onTitleChange(e){
@@ -38,13 +39,19 @@ class Project extends React.Component {
         this.setState({ items: items });
     }
 
+    addNewItem(item){
+        this.setState((prevState, props) => {
+            return { items: [...prevState.items, item] };
+        });
+    }
+
     render(){
         return (
             <div>
                 <input type="text" value={this.state.title} className="grid-title" onChange={this.onTitleChange} placeholder="Project title" />
                 <button onClick={this.publish}>Publish</button>
                 <p>{this.state.shareUrl}</p>
-                <Grid items={this.state.items} onChangeItems={this.updateItemState} />
+                <Grid items={this.state.items} addItem={this.addNewItem} onChangeItems={this.updateItemState} />
             </div>
         );
     };
