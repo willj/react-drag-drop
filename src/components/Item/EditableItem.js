@@ -25,9 +25,9 @@ class EditableItem extends React.Component{
         let {item, index, onDelete} = this.props;
         return (
             <div>
-                <input type="text" value={item.title} className="edit-item-title" onChange={this.onChange} draggable onDragStart={this.preventDrag} />
+                <input type="text" placeholder="Add a title here" value={item.title} className="edit-item-title" onChange={this.onChange} draggable onDragStart={this.preventDrag} />
                 <div className="edit-item-image" style={{ backgroundImage: 'url(' + item.url + ')' }}></div>
-                <button onClick={() => { onDelete(index); }}>Delete</button>
+                <button className="edit-item-delete" onClick={() => { onDelete(index); }}>Delete</button>
             </div>
         );
     }

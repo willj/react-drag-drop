@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Axios from 'axios';
+import './UploadingItem.css';
 
 class UploadingImage extends React.Component {
 
@@ -61,8 +62,11 @@ class UploadingImage extends React.Component {
     render(){
         return (
             <div>
-                <p>I'm uploading {this.props.file.name}</p>
-                <p>Uploaded: {this.state.percentUploaded}</p>
+                <h2 className="uploading-item-title">{this.props.item.title}</h2>
+                <div className="uploading-item-progress-box">
+                    <div className="uploading-item-progress-bar" style={{ height: this.state.percentUploaded + '%' }}></div>
+                    <span className="uploading-item-text">Uploading...</span>
+                </div>
             </div>
         );
     }

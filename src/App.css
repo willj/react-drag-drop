@@ -1,3 +1,11 @@
+body{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 div {
   position: relative;
   display: block;
@@ -16,30 +24,6 @@ div {
 h1 {
   text-align: center;
   color: #333333;
-}
-
-.item {
-  width: 180px;
-  height: 250px;
-  margin: 20px;
-  background-color: #ffffff;
-  border-radius: 4px;
-  float: left;
-  color: #000000;
-  padding: 10px;
-}
-
-.active-drag-item {
-  opacity: 0.6;
-}
-
-.active-drop-zone {
-  background-color: #fff000;
-  color: #000000;
-}
-
-.active-drop-zone * {
-  pointer-events: none;
 }
 
 #dropper{

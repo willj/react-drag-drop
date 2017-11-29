@@ -2,6 +2,7 @@ import React from 'react';
 import UploadingItem from './UploadingItem';
 import EditableItem from './EditableItem';
 import PropTypes from 'prop-types';
+import './Item.css';
 
 const Item = ({item, index, onChange, onDelete}) => {
     return (item.url) 
