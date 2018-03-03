@@ -14,6 +14,29 @@ class FileDropHandler extends React.Component {
 
         this.fileDropped = this.fileDropped.bind(this);
         this.addFile = this.addFile.bind(this);
+        this.handlePaste = this.handlePaste.bind(this);
+    }
+
+    componentDidMount(){
+        window.addEventListener("paste", this.handlePaste);
+    }
+
+    handlePaste(e){
+        // this works on Windows Chrome/Firefox/Edge when pasting image *data* 
+        // but not image files
+        // on OS X it works in Chrome/Firefox (not Safari)
+        // with both data and image files
+
+        if (e.clipboardData){
+            let items = e.clipboardData.items;
+
+            for(let i in items){
+                if (items[i].kind === 'file'){
+                    let file = items[i].getAsFile();
+                    this.addFile(file);
+                }
+            }
+        }
     }
 
     fileDropped(e){
